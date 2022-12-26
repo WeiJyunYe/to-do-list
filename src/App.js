@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 import TodoList from "./components/TodoList"
 
-export default function TodoApp(props) {
-  const [id, setId] = useState(1)
-  const savedTodos = JSON.parse(localStorage.getItem("todos"))
+export default function App() {
+  const savedTodos = JSON.parse(localStorage.getItem("todos") ?? [])
+  const [id, setId] = useState(savedTodos.length ? savedTodos[savedTodos.length - 1].id : 0)
   const [todos, setTodos] = useState(savedTodos || [
     {
       id: 0,
@@ -21,14 +21,15 @@ export default function TodoApp(props) {
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos))
-  })
+  }, [todos])
 
   const [value, setValue] = useState("")
 
   const addTodo = (e) => {
+    //console.log(e)
     e.preventDefault()
     setTodos(oldTodos => {
-      console.log(id)
+      //console.log(id)
       const newTodos = [...oldTodos]
       newTodos.push(
         {
@@ -42,15 +43,15 @@ export default function TodoApp(props) {
     })
 
     setId(id + 1)
-    console.log(id)
+    //console.log(id)
     setValue("")
   }
 
-  console.table(todos)
+  //console.table(todos)
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex flex-col items-center w-screen h-screen bg-gray-800 overflow-y-auto">
+    <div className="flex flex-col items-center w-full h-screen bg-gray-800">
+      <div className="flex flex-col items-center w-full h-screen overflow-auto p-5">
         <h1 className="text-4xl text-white p-2">Todo List</h1>
         <form onSubmit={addTodo}>
           <input
@@ -62,7 +63,7 @@ export default function TodoApp(props) {
           />
           <button className="text-sm text-white bg-gray-500 px-2 ml-2 rounded-[4px] outline outline-gray-800 outline-1 active:bg-gray-400">新增</button>
         </form>
-        <div className="flex flex-col items-center w-screen h-screen border-[1px] rounded-md my-5 text-white overflow-y-auto">
+        <div className="flex flex-col items-center w-full h-screen border-[1px] rounded-md my-5 text-white overflow-y-auto">
           {
             todos.map((todo, index) => {
               const setTodo = ({
@@ -83,7 +84,7 @@ export default function TodoApp(props) {
               }
 
               const removeTodo = () => {
-                console.log(index)
+                //console.log(index)
                 setTodos(oldTodos => {
                   const newTodos = [...oldTodos]
                   newTodos.splice(index, 1)
