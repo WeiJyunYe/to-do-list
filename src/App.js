@@ -26,10 +26,8 @@ export default function App() {
   const [value, setValue] = useState("")
 
   const addTodo = (e) => {
-    //console.log(e)
     e.preventDefault()
     setTodos(oldTodos => {
-      //console.log(id)
       const newTodos = [...oldTodos]
       newTodos.push(
         {
@@ -43,11 +41,8 @@ export default function App() {
     })
 
     setId(id + 1)
-    //console.log(id)
     setValue("")
   }
-
-  //console.table(todos)
 
   return (
     <div className="flex flex-col items-center w-full h-screen bg-gray-800">
@@ -61,7 +56,9 @@ export default function App() {
             placeholder="請在此輸入文字..."
             required
           />
-          <button className="text-sm text-white bg-gray-500 px-2 ml-2 rounded-[4px] outline outline-gray-800 outline-1 active:bg-gray-400">新增</button>
+          <button className="text-sm text-white bg-gray-500 px-2 ml-2 rounded-[4px] outline outline-gray-800 outline-1 active:bg-gray-400">
+            新增
+          </button>
         </form>
         <div className="flex flex-col items-center w-full h-screen border-[1px] rounded-md my-5 text-white overflow-y-auto">
           {
@@ -84,7 +81,6 @@ export default function App() {
               }
 
               const removeTodo = () => {
-                //console.log(index)
                 setTodos(oldTodos => {
                   const newTodos = [...oldTodos]
                   newTodos.splice(index, 1)

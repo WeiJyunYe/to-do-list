@@ -1,11 +1,6 @@
 import React, { useState } from "react"
 
 export default function TodoList({ todo, setTodo, removeTodo }) {
-  const handleDelete = (e) => {
-    e.preventDefault()
-    removeTodo()
-  }
-
   const [editingValue, setEditingValue] = useState('')
 
   const handleEdit = (e) => {
@@ -21,6 +16,10 @@ export default function TodoList({ todo, setTodo, removeTodo }) {
       })
       setEditingValue(todo.text)
     }
+  }
+
+  const handleDelete = (e) => {
+    removeTodo()
   }
 
   const handleCheckBox = (e) => {
