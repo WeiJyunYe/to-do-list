@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
 import TodoList from "./components/TodoList"
 
+const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+
 export default function App() {
-  const savedTodos = JSON.parse(localStorage.getItem("todos") ?? [])
   const [id, setId] = useState(savedTodos.length ? savedTodos[savedTodos.length - 1].id : 0)
-  const [todos, setTodos] = useState(savedTodos || [
+  const [todos, setTodos] = useState(savedTodos.length ? savedTodos : [
     {
       id: 0,
       text: "新增一個代辦事項",
